@@ -130,9 +130,21 @@ int parser(char *line)
 
 int interpreter()
 {
+	char command[] = "python interface.py ";
+	if(RESULT.OPERAND1 != NULL)
+	{
+		strcat(command, " ");
+		strcat(command, RESULT.OPERAND1);
+	}
+	if(RESULT.OPERAND2 != NULL)
+	{
+		strcat(command, " ");
+		strcat(command, RESULT.OPERAND2);
+	}
+	
 	if(strcmp(RESULT.INSTRUCTION, "movf") == 0)
 	{
-		
+		system(command);
 	}
 	else if(strcmp(RESULT.INSTRUCTION, "movb") == 0)
 	{
