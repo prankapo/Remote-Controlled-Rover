@@ -1,19 +1,16 @@
-#include<Servo.h>
+#include<VarSpeedServo.h>
 
 #define pi 3.1415
 
-Servo servoL;
-Servo servoR;
+VarSpeedServo servoL;
+VarSpeedServo servoR;
 
 int steer(float *);
+int move(float *);
 
 void setup()
 {
 	Serial.begin(115200);
-	servoL.attach(9);
-	servoR.attach(10);
-	float value = 0;
-	steer(&value);
 }
 
 void loop()
@@ -45,10 +42,10 @@ void loop()
 			}
 		}
 		value *= sign;
-		Serial.println(">> Mode: " + String(mode) + ", Value: " + String(value));
+		Serial.println(buffer);
 		//Enter the cases for various modes here
 		switch(mode){
-			case 0:
+			case 0: move(&value);
 				break;
 			case 1: steer(&value);
 				break;
@@ -58,12 +55,33 @@ void loop()
 	}
 }
 
+int move(float *duration)
+{
+	unsigned long initial_time = millis();
+	while((millis() - initial_time) <= abs(*duration * 1000))
+	{
+		if(*duration > 0)
+		{
+			digitalWrite(3, 1);
+			digitalWrite(5, 0);
+		}
+		else if(*duration < 0)
+		{
+			digitalWrite(5, 1);
+			digitalWrite(3, 0);
+		}
+	}
+	digitalWrite(3, 0);
+	digitalWrite(5, 0);
+	return 0;
+}
+
 int steer(float *central)
 {
 	float inner, outer, w, l;
 	w = 12.5;
 	l = 22.5;
-	Serial.println("Steering angle is: " + String(*central));
+	//Serial.println("Steering angle is: " + String(*central));
 	if(*central != 0.00)
 	{
 		(*central) = (*central) * pi / 180.0;
@@ -77,11 +95,15 @@ int steer(float *central)
 		inner = 0.0;
 		outer = 0.0;
 	}
-	Serial.println("Inner angle: " + String(inner) + ", Outer angle: " + String(outer));
+	//Serial.println("Inner angle: " + String(inner) + ", Outer angle: " + String(outer));
 	//formatting for angles because negaive angles are not allowed
 	inner += 90.0;
 	outer += 90.0;
-	servoL.write(inner);
-	servoR.write(outer);
+	servoL.attach(9);
+	servoR.attach(10);
+	//servoL.write(inner);
+	//servoR.write(outer);
+	servoL.slowmove(inner, 30);
+	servoR.slowmove(outer, 30);
 	return 0;
 }
