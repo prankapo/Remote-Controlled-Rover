@@ -131,6 +131,7 @@ int parser(char *line)
 int interpreter()
 {
 	char command[] = "python interface.py ";
+	strcat(command, RESULT.INSTRUCTION);
 	if(RESULT.OPERAND1 != NULL)
 	{
 		strcat(command, " ");
@@ -148,23 +149,23 @@ int interpreter()
 	}
 	else if(strcmp(RESULT.INSTRUCTION, "movb") == 0)
 	{
-	
+		system(command);
 	}
 	else if(strcmp(RESULT.INSTRUCTION, "strl") == 0)
 	{
-	
+		system(command);
 	}
 	else if(strcmp(RESULT.INSTRUCTION, "strr") == 0)
 	{
-	
+		system(command);
 	}
 	else if(strcmp(RESULT.INSTRUCTION, "camc") == 0)
 	{
-	
+		//colored image capture and send, delete old image
 	}
 	else if(strcmp(RESULT.INSTRUCTION, "camb") == 0)
 	{
-	
+		//grayscale image capture and send, delete old image
 	}
 	else if(strcmp(RESULT.INSTRUCTION, "exit") == 0)
 	{
