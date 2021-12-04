@@ -38,12 +38,12 @@ Description: Zero operand instruction used to exit from the interpreter.
 Source codes are stored in `~/PROJECTS/main/`. Images are stored in `~/PROJECTS/main/images/`  
 
 ## On Capturing and transferring images from rover to host  
-First of all, establish an SSH connection using the following syntax:
-`ssh pi@IP_ADDRESS`
-IP address of RPi, provided the SSID and passphrase of the network has been saved in it, can be obtained by using an app like Fing (https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=en_IN&gl=US)
-Once the connection has been established, run the following terminal command:
+First of all, establish an SSH connection using the following syntax:  
+`ssh pi@IP_ADDRESS`  
+IP address of RPi, provided the SSID and passphrase of the network has been saved in it, can be obtained by using an app like Fing (https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=en_IN&gl=US)  
+Once the connection has been established, run the following terminal command:  
 `rm ~/PROJECTS/main/images/*.png`  
-This removes all previous images in the image folder and preserves memory space on RPi. After this, run on RPi the following command to capture and store image in the image folder:
+This removes all previous images in the image folder and preserves memory space on RPi. After this, run on RPi the following command to capture and store image in the image folder:  
 `raspistill -o ~/PROJECTS/main/images/"$(date).png"`  
 Now open a new instance of terminal on the host machine and type the following scp command to transfer images to your own system:  
 `sudo scp -r pi@IP_ADDRESS:~/PROJECTS/main/images/"$(ls *.png)" ~/PROJECTS/"Minor Project"/"Remote Controlled Rover"/images/`
