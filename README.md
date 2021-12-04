@@ -12,24 +12,24 @@ The software used in this project can be divided into two parts.
 2. Source code for microcontroller (ardcon/ardcon.ino): Servo motors and motor driver are not controlled by the on-board computer (RPi 3B+) directly. The commands to control the motion of the rover via these motors is sent serially by RPi to Arduino Nano. The code running in Nano then executes these instructions and controls the motors accordingly. ardcon.ino contains string to float function which can translate a string to a floating point value of upto 2 decimal places.
 
 ## List of Instructions supported by the interpreter at present 
-1. *movf*
+1. **movf** 
 Syntax: 'movf <time in seconds with sign>'
 Description: Single operand instruction used to make the rover move forward. Time, in seconds, for which the rover has to be rover has to move forward is passed as an operand.
 Example: 'movf +05.00			//moves rover forward for 5 seconds'
 
-2. *movb*
+2. **movb** 
 Syntax: 'movb <time in seconds with sign>'
 Description: Similar to movf, but is used to move the rover backwards.
 
-3. *strl*
+3. **strl**
 Syntax: 'strl <angle in degrees>'
 Description: Single operand instruction used to turn the steering wheels so that the rover can be turned in left direction. Angle of steer is passed as an argument.
 Example: 'strl 05.00			//steer the rover left by 5 degrees'
 
-4. *strr*
+4. **strr** 
 Syntax: 'strr <angle in degrees>'
 Description: Similar to strl, but is used to turn the rover towards right side by the angle passed as an argument with the instruction to the interpreter.
 
-5. *exit*
+5. **exit** 
 Syntax: 'exit'
 Description: Zero operand instruction used to exit from the interpreter
