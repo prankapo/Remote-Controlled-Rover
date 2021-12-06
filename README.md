@@ -3,8 +3,10 @@ This is a rover I designed as a part of my final year Minor Project. Both hardwa
 
 ## Structure of the rover 
 The base of the rover is made using PVC pipes having a diameter of 2.22 cm. The diagram for the same is shown below: 
-![Rough drawing of base of the rover](images/img1.png) 
-On top this structure is fixed a 22.5cm x 12.5cm rectangular piece of hardened cardboard, from which four screws projecting upwards. This allows us to build various levels on top of this rover. Each level can contain its own specialised hardware. For the sake of keeping the centre of gravity of the rover as low as possible for stability reasons, the power source is kept on the lowest level. 
+![Drawing of the base of the rover](plans/img/base.png)
+On top this structure is fixed a 22.5cm x 12.5cm rectangular piece of hardened cardboard, from which four screws projecting upwards. This allows us to build various levels on top of this rover. Each level can contain its own specialised hardware. For the sake of keeping the centre of gravity of the rover as low as possible for stability reasons, the power source is kept on the lowest level.  
+Engineering drawing of servo horns which are used for steering the rover is included below:  
+![Drawing of the servo horn to which the front steering wheels are connected](plans/img/"servo horn.png")  
 
 ## Description of the software 
 The software used in this project can be divided into two parts. 
