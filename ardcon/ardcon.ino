@@ -60,27 +60,17 @@ int move(float *duration)
 {
 	//remember that duration is in seconds here, whereas millis() returns number of milliseconds...
 	unsigned long initial_time = millis();
-	/*
-	*Implementing jerk motion here. If time is less than x second, then implement it, otherwise no need to implement it.
-	Here, x is the smallest interval of time for which if the motor is instantly provided power, it moves.
-	*/
-	float x;
-	x = 0.3;
-	if(abs(*duration) > x)
-	{		
-		while((millis() - initial_time) <= abs(*duration * 1000))
-		{
-			motordriver(*duration);
-			delay(x * 1000);
-			motordriver(0.00);
-			delay(x * 500);
-		}
-	}
-	else if(abs(*duration) < x)
+	while((millis() - initial_time) <= abs(*duration * 1000))
 	{
-		while((millis() - initial_time) <= abs(*duration * 1000))
+		if(*duration > 0)
 		{
-			motordriver(*duration);
+			digitalWrite(3, 1);
+			digitalWrite(5, 0);
+		}
+		else if(*duration < 0)
+		{
+			digitalWrite(5, 1);
+			digitalWrite(3, 0);
 		}
 	}
 	digitalWrite(3, 0);
