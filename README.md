@@ -15,12 +15,12 @@ The software used in this project can be divided into two parts.
 
 ## List of Instructions supported by the interpreter at present 
 1. **movf**  
-Syntax: `movf time_in_seconds_with_sign`
+Syntax: `movf <time in seconds>`
 Description: Single operand instruction used to make the rover move forward. Time, in seconds, for which the rover has to be rover has to move forward is passed as an operand.  
 Example: `movf +05.00			//moves rover forward for 5 seconds`  
   
 2. **movb**   
-Syntax: `movb <time in seconds with sign>`  
+Syntax: `movb <time in seconds>`  
 Description: Similar to movf, but is used to move the rover backwards.  
   
 3. **strl**  
