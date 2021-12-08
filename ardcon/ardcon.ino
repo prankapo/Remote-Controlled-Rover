@@ -1,4 +1,5 @@
 #include<VarSpeedServo.h>
+#include<EEPROM.h>
 
 #define pi 3.1415
 
@@ -12,6 +13,25 @@ int motordriver(float);
 void setup()
 {
 	Serial.begin(115200);
+	uint8_t sflag = EEPROM.read(0x00);
+	float angle;
+	if(sflag == 0xaa)
+	{
+		char sign = EEPROM.read(0x01);
+		angle = (EEPROM.read(0x02) - 48) * pow(10, 1);
+		angle += (EEPROM.read(0x03) - 48) * pow(10, 0);
+		angle += (EEPROM.read(0x05) - 48) * pow(10, -1);
+		angle += (EEPROM.read(0x06) - 48) * pow(10, -2);
+		if(sign == '+')
+		{
+			angle *= 1;
+		}
+		else if(sign == '-')
+		{
+			angle *= -1;
+		}
+	}
+	steer(&angle);
 }
 
 void loop()
@@ -49,6 +69,12 @@ void loop()
 			case 0: move(&value);
 				break;
 			case 1: steer(&value);
+				EEPROM.write(0x00, 0xaa);
+				EEPROM.write(0x01, buffer[1]);
+				EEPROM.write(0x02, buffer[2]);
+				EEPROM.write(0x03, buffer[3]);
+				EEPROM.write(0x04, buffer[5]);
+				EEPROM.write(0x05, buffer[6]);
 				break;
 			default:
 				break;
